@@ -8,6 +8,8 @@ function authFnc($http, $q) {
 	userMap['jdoe']='jdoepwd';
 	userMap['psmith']='psmithpwd';
 	userMap['tp']='tp';
+	userMap['tpwatcher']={'pwd':'tp','role':'watcher'};
+	userMap['tpadmin']={'pwd':'tp','role':'admin'};
 	
 	var fncContainer={
 		localAuthAsk:localAuthAsk
@@ -18,8 +20,8 @@ function authFnc($http, $q) {
 
 
 		setInterval(function(login,pwd){
-			if( userMap[login]==pwd){
-				var data={'login':login};
+			if( userMap[login].pwd==pwd){
+				var data={'login':login,'role':userMap[login].role,'validAuth':true};
 				return deferred.resolve(data);
 			}else{
 				return deferred.reject(status);

@@ -11,13 +11,15 @@ function loginCrtFnt($scope, $log, auth, $window){
 
 		var futurContent=auth.localAuthAsk($scope.user.login,$scope.user.pwd);
 		futurContent.then(
-				1
+			function(payload){
+				if(payload.validAuth && payload.role == 'admin')
+					$window.location.href = 'admin.html';
+				if(payload.validAuth && payload.role == 'watcher')
+					$window.location.href = 'watcher.html';
+			},
+			function(errorPayload){
 
-				2
-			);
-
-		if( )
-			$window.location.href = 'loginSuccess.html';
+			});
 
 	};
 
