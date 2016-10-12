@@ -1,8 +1,21 @@
-angular.module('loginApp').controller('loginCtrl',loginCrtFnt);
+angular.module('adminApp').controller('eventCtrl',eventCtrlFnt);
 
-loginCrtFnt.$inject=['$scope','$log','auth','$window'];
+eventCtrlFnt.$inject=['$scope','$log','factory','$window'];
 
-function loginCrtFnt($scope, $log, auth, $window){
+function eventCtrlFnt($scope,$log,factory,$window){
+
+    $scope.currentPresentation = factory.presentationCreation("titre",null);
+
+    $scope.newSlide = function(){
+        var content = factory.contentCreation("titre",null,null)
+        var slide = factory.slideCreation("titre",null);
+        slide.contentMap.push(content);
+        $scope.currentPresentation.slideArray.push(slide);
+    }
+
+}
+
+/*function loginCrtFnt($scope, $log, auth, $window){
 	
 	$scope.logAuth = function() {
 		$log.info('user login', $scope.user.login);
@@ -29,4 +42,4 @@ function loginCrtFnt($scope, $log, auth, $window){
 		$log.info('user pwd', user.pwd);
 	};
 
-}
+}*/
