@@ -39,12 +39,15 @@ function SlidModel (type, id, title, fileName, data) {
 
 SlidModel.create = function(slid,callback) {
 
-	
 
 	fs.writeFile(path.join(CONFIG.contentDirectory, slid.fileName), slid.data, function(err) {
+		if(slid.id == null) {
+			return console.log("L'id ne peut pas être nulle");
+		}
 		if (err) {
 			return console.log(err);
 		}
+		
 		console.log('CREATED ' + slid.id);
 		fs.writeFile(path.join(CONFIG.contentDirectory, slid.id + ".meta.json"), JSON.stringify(slid), function(err) {
 			if (err) {
@@ -60,9 +63,13 @@ SlidModel.create = function(slid,callback) {
 SlidModel.read = function(id,callback) {
 
 	fs.readFile(path.join(CONFIG.contentDirectory, id + ".meta.json"), 'utf8', function(err,data) {  
+		if(id == null) {
+			return console.log("L'id ne peut pas être nulle");
+		}
 		if (err) {
 			return console.log(err);
 		}
+		
 		var obj = JSON.parse(data);
 		console.log("fichier lu");
 		callback(err,obj);
@@ -77,15 +84,22 @@ SlidModel.update = function(slid,callback) {
 
 	if (slid.getData() && slid.getData().length > 0){
 		fs.writeFile(path.join(CONFIG.contentDirectory, slid.fileName), slid.data, function(err) {
+			if(slid.id == null) {
+				return console.log("L'id ne peut pas être nulle");
+			}
+			if(slid.fileName === undefined) {
+				return console.log("Le filename ne peut pas être nul");
+			}
 			if (err) {
 				return console.log(err);
 			}
+			
 			console.log('UPDATED: ' + slid.id);
 			fs.writeFile(path.join(CONFIG.contentDirectory, slid.id + ".meta.json"), JSON.stringify(slid), function(err) {
 				if (err) {
 					return console.log(err);
 				}
-				console.log('UPDATES ' + slid.id);
+				console.log('UPDATED ' + slid.id);
 				callback(err);
 			});
 		});

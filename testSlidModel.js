@@ -76,14 +76,14 @@ function testErr(slid) {
 	var slidTest = new SlidModel(12);
 	console.dir(slidTest);
 
-	test1(12);
+	//test1(12);
 	slid.id = null;
 	test1(slid);
 	test2(slid);
 	test3(slid);
 
-	slid.id = 12;
-	test3(slid);
+    slid.id = 12;
+    test3(slid);
 }
 
 (function() {
