@@ -1,3 +1,6 @@
 {
-    "port" :  1337
+    "port" :  1337,
+    "contentDirectory": "/Users/rudyjdira/Documents/ProjetASI/TpStepByStepNode/uploads",
+    "presentationDirectory": "/Users/rudyjdira/Documents/ProjetASI/TpStepByStepNode/presentation_content"
+
 }

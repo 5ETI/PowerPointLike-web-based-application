@@ -3,7 +3,7 @@
 var CONFIG = require("./config.json");
 process.env.CONFIG = JSON.stringify(CONFIG);
 
-var utils = require("./app/utils/utils.js");
+var utils = require("./utils.js");
 var SlidModel = require("./app/models/slid.model.js");
 
 var slid = new SlidModel();
@@ -24,6 +24,7 @@ function test1(slid) {
 		if (err) {
 			console.error(err);
 		} else {
+			console.log("test2 begin");
 			test2(slid);
 		}
 	});
