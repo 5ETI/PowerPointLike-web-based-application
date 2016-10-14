@@ -74,6 +74,7 @@ SlidModel.read = function(id,callback) {
 SlidModel.update = function(slid,callback) {
 
 
+
 	if (slid.getData() && slid.getData().length > 0){
 		fs.writeFile(path.join(CONFIG.contentDirectory, slid.fileName), slid.data, function(err) {
 			if (err) {
@@ -95,18 +96,30 @@ SlidModel.update = function(slid,callback) {
 SlidModel.delete = function(id,callback) {
 
 
-	fs.unlink(path.join(CONFIG.contentDirectory, id + '.png'),function(err){
-		if(err) {
+	fs.readFile(path.join(CONFIG.contentDirectory, id + ".meta.json"), 'utf8', function(err,data) {  
+		if (err) {
 			return console.log(err);
-		} 
-		console.log('file deleted successfully');
-		fs.unlink(path.join(CONFIG.contentDirectory, slid.id + ".meta.json"),function(err){
+		}
+		var obj = JSON.parse(data);
+		console.log(obj);
+		var filename = obj["fileName"];
+		console.log(filename);
+		fs.unlink(path.join(CONFIG.contentDirectory, filename),function(err){
 			if(err) {
 				return console.log(err);
 			} 
 			console.log('file deleted successfully');
-			callback(err);
+			fs.unlink(path.join(CONFIG.contentDirectory, id + ".meta.json"),function(err){
+				if(err) {
+					return console.log(err);
+				} 
+				console.log('file deleted successfully');
+				callback(err);
+			});
 		});
+
 	});
+
+	
 
 };
