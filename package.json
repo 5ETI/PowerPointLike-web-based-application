@@ -11,6 +11,7 @@
   "author": "Bertrand",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "multer": "^1.2.0"
   }
 }

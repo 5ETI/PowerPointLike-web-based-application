@@ -12,6 +12,8 @@ var  CONFIG  =  require("./config.json");
 process.env.CONFIG  =  JSON.stringify(CONFIG);
 var util = require("./utils.js");
 var  defaultRoute  =  require("./app/routes/default.route.js");
+var  slidRouter  =  require("./app/routes/slid.router.js");
+
 
 var  app  =  express();
 
@@ -29,7 +31,7 @@ app.get("/loadPres",  function (request, response) {
 
 	fs.readdir(CONFIG.contentDirectory, function (err, files) {
 		if (err) {
-			console.err(response.statut(500).end);
+			console.error(response.statut(500).end);
 			return response.statut(500).end;
 		}
 		var filteredFiles;
@@ -40,8 +42,11 @@ app.get("/loadPres",  function (request, response) {
 		var compteur = 0;
 		filteredFiles.forEach(function (file) {
 
-			fs.readFile(CONFIG.contentDirectory + '/' + file, 'utf8', function(err,data) {  
-				if (err) throw err;
+			fs.readFile(path.join(CONFIG.contentDirectory, file), 'utf8', function(err,data) {  
+				if (err) {
+					console.error(response.statut(500).end);
+					return response.statut(500).end;
+				}				}
 				var obj = JSON.parse(data);
 				var Id = obj["id"];
 
@@ -80,7 +85,7 @@ app.post("/savePres",  function (request, response) {
 
 	fs.writeFile(path.join(CONFIG.presentationDirectory, Id + ".meta.json"), JSON.stringify(presJson), (err) => {
 		if (err) {
-			console.err(response.statut(500).end);
+			console.error(response.statut(500).end);
 			return response.statut(500).end;
 		}
 
