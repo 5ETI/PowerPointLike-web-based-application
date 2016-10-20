@@ -59,7 +59,6 @@ function test3(slid) {
 
 function test4(slid) {
 	console.log("====== TEST 4 =======");
-
 	SlidModel.delete(slid.id, function(err) {
 		if (err) {
 			console.error(err);
@@ -68,15 +67,13 @@ function test4(slid) {
 			testErr(slid);
 		}
 	});
-
 }
 
 function testErr(slid) {
 	console.log("====== TEST ERROR =======");
 	var slidTest = new SlidModel(12);
 	console.dir(slidTest);
-
-	//test1(12);
+	test1(12);
 	slid.id = null;
 	test1(slid);
 	test2(slid);
@@ -84,6 +81,7 @@ function testErr(slid) {
 
     slid.id = 12;
     test3(slid);
+   
 }
 
 (function() {

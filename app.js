@@ -13,6 +13,7 @@ process.env.CONFIG  =  JSON.stringify(CONFIG);
 var util = require("./utils.js");
 var  defaultRoute  =  require("./app/routes/default.route.js");
 var  slidRouter  =  require("./app/routes/slid.router.js");
+var IOController = require("./app/controllers/io.controller.js");
 
 
 var  app  =  express();
@@ -20,6 +21,11 @@ var  app  =  express();
 // init server
 var  server  =  http.createServer(app);
 server.listen(CONFIG.port);
+IOController.listen(server);
+
+/*io.sockets.on('connection', function (socket) {
+	console.log('Un client est connecté !');
+});*/
 
 app.use(defaultRoute);
 app.use("/admin",express.static(path.join(__dirname, "/public/admin")));
@@ -46,7 +52,7 @@ app.get("/loadPres",  function (request, response) {
 				if (err) {
 					console.error(response.statut(500).end);
 					return response.statut(500).end;
-				}				}
+				}				
 				var obj = JSON.parse(data);
 				var Id = obj["id"];
 
