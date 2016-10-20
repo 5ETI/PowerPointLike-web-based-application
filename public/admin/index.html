@@ -48,13 +48,13 @@
   <!-- *************   CENTER PANEL  *************-->
   <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 zeroRef fullScreenHeight" id="Centerpanel"> 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
-     <div class="btn-group" role="group" aria-label="..." ng-controller="playerCtr">
-       <button type="button" class="btn btn-default" ng-click="StepBackward()"><span class="glyphicon glyphicon-step-backward" aria-hidden="true" ></span></button>
-       <button type="button" class="btn btn-default" ng-click="Backward()"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
-       <button type="button" class="btn btn-default" ng-click="Play()"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
-       <button type="button" class="btn btn-default" ng-click="Pause()"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
-       <button type="button" class="btn btn-default" ng-click="Forward()"><span class="glyphicon glyphicon-forward" aria-hidden="true" ></span></button>
-       <button type="button" class="btn btn-default" ng-click="StepForward()"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></button> 
+        <div class="btn-group" role="group" aria-label="..." >
+       <button type="button" class="btn btn-default" ng-click="changeSlid('first')"><span class="glyphicon glyphicon-step-backward" aria-hidden="true" ></span></button>
+       <button type="button" class="btn btn-default" ng-click="changeSlid('previous')"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
+       <button type="button" class="btn btn-default" ng-click="changeSlid('start')"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
+       <button type="button" class="btn btn-default" ng-click="changeSlid('pause')"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
+       <button type="button" class="btn btn-default" ng-click="changeSlid('next')"><span class="glyphicon glyphicon-forward" aria-hidden="true" ></span></button>
+       <button type="button" class="btn btn-default" ng-click="changeSlid('last')"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></button> 
      </div>
    </div>
    
