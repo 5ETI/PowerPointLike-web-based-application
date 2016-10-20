@@ -43,7 +43,7 @@ json_file["title"]=title;
 json_file["filename"]= filename;
 json_file["data"]=request.file;
 
-SlidController.create(json_file, true, function(err, data){
+SlidController.create(json_file, function(err, data){
 	if(err){
 		console.error(response.statut(500).end);
 		return response.statut(500).end;
