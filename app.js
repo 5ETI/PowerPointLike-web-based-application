@@ -12,7 +12,7 @@ var  CONFIG  =  require("./config.json");
 process.env.CONFIG  =  JSON.stringify(CONFIG);
 var util = require("./utils.js");
 var  defaultRoute  =  require("./app/routes/default.route.js");
-var  slidRouter  =  require("./app/routes/slid.router.js");
+var  slidRoute  =  require("./app/routes/slid.router.js");
 var IOController = require("./app/controllers/io.controller.js");
 
 
@@ -28,6 +28,7 @@ IOController.listen(server);
 });*/
 
 app.use(defaultRoute);
+app.use(slidRoute);
 app.use("/admin",express.static(path.join(__dirname, "/public/admin")));
 app.use("/login",express.static(path.join(__dirname, "/public/login")));
 

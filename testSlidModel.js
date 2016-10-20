@@ -59,6 +59,7 @@ function test3(slid) {
 
 function test4(slid) {
 	console.log("====== TEST 4 =======");
+/*
 	SlidModel.delete(slid.id, function(err) {
 		if (err) {
 			console.error(err);
@@ -67,6 +68,7 @@ function test4(slid) {
 			testErr(slid);
 		}
 	});
+*/
 }
 
 function testErr(slid) {
