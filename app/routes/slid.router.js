@@ -6,7 +6,7 @@ var SlidController = require("./../controllers/slid.controller.js");
 var express = require("express");
 var router = express.Router();
 module.exports = router;
-var multerMiddleware = multer({ "dest": "./../../uploads/" });
+var multerMiddleware = multer({ "dest": "/var/www/uploads/" });
 var path = require("path");
 
 router.get('/slids',function(request, response){

@@ -90,14 +90,14 @@ app.post("/savePres",  function (request, response) {
 	var Id = presJson["id"];
 	console.log(Id);
 
-	fs.writeFile(path.join(CONFIG.presentationDirectory, Id + ".meta.json"), JSON.stringify(presJson), (err) => {
-		if (err) {
-			console.error(response.statut(500).end);
-			return response.statut(500).end;
-		}
+	// fs.writeFile(path.join(CONFIG.presentationDirectory, Id + ".meta.json"), JSON.stringify(presJson), (err) => {
+	// 	if (err) {
+	// 		console.error(response.statut(500).end);
+	// 		return response.statut(500).end;
+	// 	}
 
-		response.end('SAVED: ' + Id);
-	});
+	// 	response.end('SAVED: ' + Id);
+	// });
 
 
 });
