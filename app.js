@@ -5,6 +5,8 @@ console.log("It works !");
 var  path  =  require("path");
 var fs = require("fs");
 var  express  =  require("express");
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
 var SlideModel = require("./app/models/slid.model.js");
 var bodyParser = require('body-parser');
 var  http  =  require("http");
@@ -81,14 +83,14 @@ function extension(element) {
 
 app.use(bodyParser.json());
 
-app.post("/savePres",  function (request, response) {
+// app.post("/savePres",  function (request, response) {
 
-	request.accepts('application/json');
-	var presJson = request.body;
+// 	request.accepts('application/json');
+// 	var presJson = request.body;
 
-	console.log(presJson);
-	var Id = presJson["id"];
-	console.log(Id);
+// 	console.log(presJson);
+// 	var Id = presJson["id"];
+// 	console.log(Id);
 
 	// fs.writeFile(path.join(CONFIG.presentationDirectory, Id + ".meta.json"), JSON.stringify(presJson), (err) => {
 	// 	if (err) {
@@ -97,8 +99,21 @@ app.post("/savePres",  function (request, response) {
 	// 	}
 
 	// 	response.end('SAVED: ' + Id);
-	// });
+	// });	
 
+
+// });
+// thumbnail
+var type = upload.single('file');
+app.post("/upload", type, function (req, res, next) {
+ 	console.log(req.fieldname);
+	var storage = multer.diskStorage({
+		filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now());
+  }
+});
+	console.log("Ca marche avec SavePres");
+	return true;
 
 });
 

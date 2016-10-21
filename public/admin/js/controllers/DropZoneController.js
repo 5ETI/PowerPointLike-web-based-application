@@ -8,7 +8,7 @@ angular.module('adminApp').controller('dropzoneController', ['$scope', '$log', '
      previewNode.parentNode.removeChild(previewNode);
 
       var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-        url: "/savePres", // Set the url
+        url: "/upload", // Set the url
         thumbnailWidth: 80,
         thumbnailHeight: 80,
         parallelUploads: 20,
@@ -20,6 +20,7 @@ angular.module('adminApp').controller('dropzoneController', ['$scope', '$log', '
 
       myDropzone.on("addedfile", function(file) {
         // Hookup the start button
+        $log.info("begin start");
         file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
       });
 
@@ -69,6 +70,8 @@ angular.module('adminApp').controller('dropzoneController', ['$scope', '$log', '
       };
       myDropzone.on("success", function(file,responsenew) {
         alert("sflmjsdf");
+        var args = Array.prototype.slice.call(arguments);
+        alert("args");
       });
 
       return myDropzone;
