@@ -48,55 +48,53 @@
   <!-- *************   CENTER PANEL  *************-->
   <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 zeroRef fullScreenHeight" id="Centerpanel"> 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
-      <div id='toolbar'>
         <div class='wrapper text-center'>
-         <div class="btn-group" role="group" aria-label="..." ng-controller="playerCtr" >
-           <button type="button" class="btn btn-default" ng-click="StepBackward()"><span class="glyphicon glyphicon-step-backward" aria-hidden="true" ></span></button>
-           <button type="button" class="btn btn-default" ng-click="Backward()"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
-           <button type="button" class="btn btn-default" ng-click="Play()"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
-           <button type="button" class="btn btn-default" ng-click="Pause()"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
-           <button type="button" class="btn btn-default" ng-click="Forward()"><span class="glyphicon glyphicon-forward" aria-hidden="true" ></span></button>
-           <button type="button" class="btn btn-default" ng-click="StepForward()"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></button> 
+          <div class="btn-group" role="group" aria-label="..." >
+           <button type="button" class="btn btn-default" ng-click="changeSlid('first')"><span class="glyphicon glyphicon-step-backward" aria-hidden="true" ></span></button>
+           <button type="button" class="btn btn-default" ng-click="changeSlid('previous')"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
+           <button type="button" class="btn btn-default" ng-click="changeSlid('start')"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
+           <button type="button" class="btn btn-default" ng-click="changeSlid('pause')"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
+           <button type="button" class="btn btn-default" ng-click="changeSlid('next')"><span class="glyphicon glyphicon-forward" aria-hidden="true" ></span></button>
+           <button type="button" class="btn btn-default" ng-click="changeSlid('last')"><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></button> 
          </div>
        </div>
      </div>
-   </div>
-   
-   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="subpanelcenter"> 
-    <div class="form-group" >
-      <label for="currentSlideTitle">Title</label>
-      <input type="text" ng-model="currentSlide.title" class="form-control" id="currentSlideTitle">
-      <label for="currentSlideText">Text</label>
-      <textarea rows="5" type="text" ng-model="currentSlide.txt"  class="form-control" id="currentSlideText"></textarea>
-    </div>  
-    <div ng-drop="true" ng-drop-success="onDropComplete($data,$event)"  style="min-height: 100px;min-width: 100px;" id="divImage">
-      <img ng-src="{{contentMap.payload[currentSlide.contentMap[1]].src}}" alt="{{contentMap.payload[currentSlide.contentMap[1]].title}}" class="img-responsive" id="imagecenter">
+
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="subpanelcenter"> 
+      <div class="form-group" >
+        <label for="currentSlideTitle">Title</label>
+        <input type="text" ng-model="currentSlide.title" class="form-control" id="currentSlideTitle">
+        <label for="currentSlideText">Text</label>
+        <textarea rows="5" type="text" ng-model="currentSlide.txt"  class="form-control" id="currentSlideText"></textarea>
+      </div>  
+      <div ng-drop="true" ng-drop-success="onDropComplete($data,$event)"  style="min-height: 100px;min-width: 100px;" id="divImage">
+        <img ng-src="{{contentMap.payload[currentSlide.contentMap[1]].src}}" alt="{{contentMap.payload[currentSlide.contentMap[1]].title}}" class="img-responsive" id="imagecenter">
+      </div>
+    </div>
+
+  </div>
+  <!-- *************   RIGHT PANEL  *************-->
+  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Rightpanel"> 
+   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for..." ng-model="searchContent.title">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true" id ="buttonSearch"></span></button> 
+      </span>
     </div>
   </div>
-  
-</div>
-<!-- *************   RIGHT PANEL  *************-->
-<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id="Rightpanel"> 
- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search for..." ng-model="searchContent.title">
-    <span class="input-group-btn">
-      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true" id ="buttonSearch"></span></button> 
-    </span>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" action="./img"> 
+    <div ng-include="'DropZoneArea.html'"/>
   </div>
-</div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" action="./img"> 
-  <div ng-include="'DropZoneArea.html'"/>
-</div>
-<div class="drag-object">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contentBlock ng-binding ng-scope" ng-repeat="content in contentMap.array | filter:searchContent | orderBy: 'type'" ng-if="content.allowClone !== false"> 
-    <!-- <div ></div> -->
-    <input type="text" ng-model="content.title" class="form-control" id="currentContentTitle">
-    <div ng-drag="true" ng-drag-data="content" ng-drag-success="onDragSuccess($data,$event)" id="drag">
-      <img ng-src="{{content.src}}" alt="{{content.title}}" class="img-thumbnail" id ="image">
+  <div class="drag-object">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contentBlock ng-binding ng-scope" ng-repeat="content in contentMap.array | filter:searchContent | orderBy: 'type'" ng-if="content.allowClone !== false"> 
+      <!-- <div ></div> -->
+      <input type="text" ng-model="content.title" class="form-control" id="currentContentTitle">
+      <div ng-drag="true" ng-drag-data="content" ng-drag-success="onDragSuccess($data,$event)" id="drag">
+        <img ng-src="{{content.src}}" alt="{{content.title}}" class="img-thumbnail" id ="image">
+      </div>
     </div>
   </div>
-</div>
 </div>
 </div>
 <hr/>
