@@ -56,14 +56,13 @@ function eventCrtFnt($scope, $log, $window, factory, comm){
   }
 
 
-  $scope.onDragComplete=function(data,evt){
-   console.log("drag success, data:", data);
- }
+  $scope.onDragSuccess=function(data,evt){
+    //copier image dans son emplacement d'origin? on la chope et on la met dedans en attendant le drop (voir si il faut la supprier ensuite)
+  }
 
-
- $scope.onDropComplete=function(data,evt){
-  if($scope.currentSlide != undefined){
-    $scope.currentSlide.contentMap[1] = data.id;
+  $scope.onDropComplete=function(data,evt){
+    if($scope.currentSlide != undefined){
+      $scope.currentSlide.contentMap[1] = data.id;
             //needed to inform angular that a change occurred on the current variable, this fire an event change
             $scope.$apply();
             console.log("drop success, data.id:", data.id);

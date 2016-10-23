@@ -43,19 +43,6 @@ angular.module('adminApp').controller('dropzoneController', ['$scope', '$log', '
 
       myDropzone.on("queuecomplete", function(progress) {
         // myDropzone.removeAllFiles(true);
-        var available_content=comm.loadImages('test','test');
-        available_content.then(
-          function(payload) { 
-            var cont = factory.contentCreation('img 0', 'test ', 'img/5.jpg');
-            var key = cont.id;
-            payload[key] = cont;
-            $scope.$parent.contentMap.payload = payload;
-            $scope.$parent.contentMap.array=factory.mapToArray(payload);
-            $log.info(payload);
-          },
-          function(errorPayload) {
-            $log.error('failure loading movie', errorPayload);
-          });
       });
 
 
@@ -69,9 +56,21 @@ angular.module('adminApp').controller('dropzoneController', ['$scope', '$log', '
         myDropzone.removeAllFiles(true);
       };
       myDropzone.on("success", function(file,responsenew) {
-        alert("sflmjsdf");
-        var args = Array.prototype.slice.call(arguments);
-        alert("args");
+        // var args = Array.prototype.slice.call(arguments);
+        // String json = JSON.stringify(file);
+        alert(responsenew.path);
+        var available_content=comm.loadImages('test','test');
+        available_content.then(
+          function(payload) { 
+            var cont = factory.contentCreation('img'+5, 'test ', "../../uploads/11.jpg");// Can't download from outside public
+            var key = cont.id;
+            payload[key] = cont;
+            $scope.$parent.contentMap.payload = payload;
+            $scope.$parent.contentMap.array=factory.mapToArray(payload);
+          },
+          function(errorPayload) {
+            $log.error('failure loading movie', errorPayload);
+          });
       });
 
       return myDropzone;

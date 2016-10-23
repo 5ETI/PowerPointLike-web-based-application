@@ -103,19 +103,26 @@ app.use(bodyParser.json());
 
 
 // });
-// thumbnail
+
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, '/var/www/nodejs/uploads/');
+	},
+	filename: function (req, file, cb) {
+		console.log(file.originalname);
+		cb(null,file.originalname);
+	}
+})
+
+var upload = multer({ storage: storage });
+
 var type = upload.single('file');
 app.post("/upload", type, function (req, res, next) {
- 	console.log(req.fieldname);
-	var storage = multer.diskStorage({
-		filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now());
-  }
+	console.log("Upload done in folder /uploads");
+	console.log(req.file);
+	res.send(req.file);
 });
-	console.log("Ca marche avec SavePres");
-	return true;
 
-});
 
 
 
