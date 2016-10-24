@@ -15,7 +15,7 @@ html,body {height: 100%; padding-top: 0px; overflow-x:hidden; overflow-y:hidden}
 /*NG-DROP*/
 [ng-drag], [ng-drag-clone]{
   -moz-user-select: -moz-none;
-/*  -khtml-user-select: none;*/
+  /*  -khtml-user-select: none;*/
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -233,6 +233,7 @@ button:focus{
 /*Mimic table appearance */
 div.table {
   display: table;
+  border-radius: 20px;
 }
 div.table .file-row {
   display: table-row;
@@ -273,5 +274,68 @@ div.table .file-row:nth-child(odd) {
   display: none;
 }
 #previews .file-row.dz-success .delete {
-  display: block;
+  /*display: block;*/
+}
+#previewsDIV{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20px;
+}
+#template{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20px;
+}
+
+.dropzone{
+  .dz-preview {
+    position: relative;
+    /*display: inline-block;*/
+    border-radius: 20px;
+    vertical-align: top;
+
+    margin: 16px;
+    min-height: 100px;
+
+    &:hover {
+      // Making sure that always the hovered preview element is on top
+      z-index: 1000;
+      .dz-details {
+        opacity: 1;
+      }
+    }
+
+    &.dz-file-preview {
+      border-radius: 20px;
+
+      .dz-image {
+        border-radius: $image-border-radius;
+        background: #999;
+        background: linear-gradient(to bottom, #eee, #ddd);
+      }
+
+      .dz-details {
+        opacity: 1;
+      }
+    }
+
+    &.dz-image-preview {
+      border-radius: 20px;
+      background: white;
+      .dz-details {
+        @include prefix((transition: opacity 0.2s linear));
+      }
+    }
+
+    .dz-remove {
+      font-size: 14px;
+      text-align: center;
+      display: block;
+      cursor: pointer;
+      border: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }

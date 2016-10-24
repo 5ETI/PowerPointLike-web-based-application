@@ -1,4 +1,3 @@
-
 angular.module('adminApp').controller('dropzoneController', ['$scope', '$log', 'factory','comm', function($scope, $log, factory,comm) {
 
      // Get the template HTML and remove it from the doument
@@ -62,7 +61,7 @@ angular.module('adminApp').controller('dropzoneController', ['$scope', '$log', '
         var available_content=comm.loadImages('test','test');
         available_content.then(
           function(payload) { 
-            var cont = factory.contentCreation('img'+5, 'test ', "../../uploads/11.jpg");// Can't download from outside public
+            var cont = factory.contentCreation('img'+5, 'test ', "img/"+responsenew.originalname);// Can't download from outside public
             var key = cont.id;
             payload[key] = cont;
             $scope.$parent.contentMap.payload = payload;

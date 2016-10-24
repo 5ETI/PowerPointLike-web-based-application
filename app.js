@@ -16,6 +16,8 @@ var util = require("./utils.js");
 var  defaultRoute  =  require("./app/routes/default.route.js");
 var  slidRoute  =  require("./app/routes/slid.router.js");
 var IOController = require("./app/controllers/io.controller.js");
+var io = require('socket.io');
+
 
 
 var  app  =  express();
@@ -24,15 +26,13 @@ var  app  =  express();
 var  server  =  http.createServer(app);
 server.listen(CONFIG.port);
 IOController.listen(server);
-
-/*io.sockets.on('connection', function (socket) {
-	console.log('Un client est connecté !');
-});*/
+io = io.listen(server);
 
 app.use(defaultRoute);
 app.use(slidRoute);
 app.use("/admin",express.static(path.join(__dirname, "/public/admin")));
 app.use("/login",express.static(path.join(__dirname, "/public/login")));
+app.use("/uploads",express.static(path.join(__dirname, "/uploads")));
 
 app.get("/loadPres",  function (request, response) {
 
@@ -83,30 +83,10 @@ function extension(element) {
 
 app.use(bodyParser.json());
 
-// app.post("/savePres",  function (request, response) {
-
-// 	request.accepts('application/json');
-// 	var presJson = request.body;
-
-// 	console.log(presJson);
-// 	var Id = presJson["id"];
-// 	console.log(Id);
-
-	// fs.writeFile(path.join(CONFIG.presentationDirectory, Id + ".meta.json"), JSON.stringify(presJson), (err) => {
-	// 	if (err) {
-	// 		console.error(response.statut(500).end);
-	// 		return response.statut(500).end;
-	// 	}
-
-	// 	response.end('SAVED: ' + Id);
-	// });	
-
-
-// });
-
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		cb(null, '/var/www/nodejs/uploads/');
+		cb(null, '/var/www/nodejs/public/admin/img/');
 	},
 	filename: function (req, file, cb) {
 		console.log(file.originalname);
@@ -122,6 +102,16 @@ app.post("/upload", type, function (req, res, next) {
 	console.log(req.file);
 	res.send(req.file);
 });
+
+io.sockets.on('connection', function (socket) {
+	console.log('Client connected.');
+
+	socket.emit('connection', { hello: 'world' });
+	socket.on('data_comm', function (data) {
+		console.log(data);
+	});
+});
+
 
 
 

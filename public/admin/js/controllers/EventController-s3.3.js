@@ -57,7 +57,8 @@ function eventCrtFnt($scope, $log, $window, factory, comm){
 
 
   $scope.onDragSuccess=function(data,evt){
-    //copier image dans son emplacement d'origin? on la chope et on la met dedans en attendant le drop (voir si il faut la supprier ensuite)
+    //copier image dans son emplacement d'origin? on la chope et on la met dedans en attendant
+    // le drop (voir si il faut la supprimer ensuite) Ou sinon on s en ballec de drag sans clone mais c est pas propre
   }
 
   $scope.onDropComplete=function(data,evt){

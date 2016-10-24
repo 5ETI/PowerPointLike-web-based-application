@@ -33,17 +33,6 @@ function commFnc($http,$q, $log,$filter, factory){
 		},500,presName,presID);
 		
 		return deferred.promise;
-//// ****************** FOR WHEN NODEJS SERVER READY  *****************************  ////////
-// 		var deferred = $q.defer();
-// 		$http.get('/resources_list').
-// 		success(function(data, status, headers, config) {
-// 			deferred.resolve(data);
-// 		}).
-// 		error(function(data, status, headers, config) {
-// 			deferred.reject(status);
-// // or server returns response with an error status.
-// });
-// 		return deferred.promise;
 };
 
 
@@ -92,10 +81,13 @@ function savePres(presName,presID){
 	return deferred.promise;
 };
 
+
+
 comm.io = {};
 comm.io.socketConnection=function(scope,uuid){
-	var socket = io.connect();
-	comm.io.uuid=uuid;
+	var socket = io.connect('http://localhost:1337');
+	comm.io.uuid = uuid;
+	alert("socket connection");
 	socket.on('connection', function () {
 		socket.emit('data_comm',{'id':comm.io.uuid});
 	});

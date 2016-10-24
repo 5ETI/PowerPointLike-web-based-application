@@ -46,7 +46,7 @@
     </div>
   </div>
   <!-- *************   CENTER PANEL  *************-->
-  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 zeroRef fullScreenHeight" id="Centerpanel"> 
+  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 zeroRef fullScreenHeight" id="Centerpanel" ng-controller="playerCtr">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
         <div class='wrapper text-center'>
           <div class="btn-group" role="group" aria-label="..." >
@@ -88,7 +88,6 @@
   </div>
   <div class="drag-object">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 contentBlock ng-binding ng-scope" ng-repeat="content in contentMap.array | filter:searchContent | orderBy: 'type'" ng-if="content.allowClone !== false"> 
-      <!-- <div ></div> -->
       <input type="text" ng-model="content.title" class="form-control" id="currentContentTitle">
       <div ng-drag="true" ng-drag-data="content" ng-drag-success="onDragSuccess($data,$event)" id="drag">
         <img ng-src="{{content.src}}" alt="{{content.title}}" class="img-thumbnail" id ="image">
@@ -98,7 +97,6 @@
 </div>
 </div>
 <hr/>
-<!-- </div> -->
 </div>
 </div>
 </div>
@@ -109,6 +107,7 @@
 <script src="lib/js/jquery-1.11.3.min.js"></script>
 <script src="lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script src="lib/js/dropzone.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
 
 
 <!-- ANGULAR -->    
