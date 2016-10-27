@@ -5,8 +5,6 @@ console.log("It works !");
 var  path  =  require("path");
 var fs = require("fs");
 var  express  =  require("express");
-var multer  = require('multer');
-var upload = multer({ dest: 'uploads/' });
 var SlideModel = require("./app/models/slid.model.js");
 var bodyParser = require('body-parser');
 var  http  =  require("http");
@@ -16,8 +14,6 @@ var util = require("./utils.js");
 var  defaultRoute  =  require("./app/routes/default.route.js");
 var  slidRoute  =  require("./app/routes/slid.router.js");
 var IOController = require("./app/controllers/io.controller.js");
-var io = require('socket.io');
-
 
 
 var  app  =  express();
@@ -26,23 +22,27 @@ var  app  =  express();
 var  server  =  http.createServer(app);
 server.listen(CONFIG.port);
 IOController.listen(server);
-io = io.listen(server);
+
+/*io.sockets.on('connection', function (socket) {
+	console.log('Un client est connecté !');
+});*/
 
 app.use(defaultRoute);
 app.use(slidRoute);
 app.use("/admin",express.static(path.join(__dirname, "/public/admin")));
 app.use("/login",express.static(path.join(__dirname, "/public/login")));
-app.use("/uploads",express.static(path.join(__dirname, "/uploads")));
 
 app.get("/loadPres",  function (request, response) {
 
 	var jsonData = {};
 
-	fs.readdir(CONFIG.contentDirectory, function (err, files) {
+	fs.readdir(CONFIG.presentationDirectory, function (err, files) {
+
 		if (err) {
-			console.error(response.statut(500).end);
-			return response.statut(500).end;
+			console.error(response.status(500).end);
+			return response.status(500).end;
 		}
+
 		var filteredFiles;
 		files.filter(function (file) {
 			filteredFiles = files.filter(extension);
@@ -51,10 +51,10 @@ app.get("/loadPres",  function (request, response) {
 		var compteur = 0;
 		filteredFiles.forEach(function (file) {
 
-			fs.readFile(path.join(CONFIG.contentDirectory, file), 'utf8', function(err,data) {  
+			fs.readFile(path.join(CONFIG.presentationDirectory, file), 'utf8', function(err,data) {  
 				if (err) {
-					console.error(response.statut(500).end);
-					return response.statut(500).end;
+					console.error(response.status(500).end);
+					return response.status(500).end;
 				}				
 				var obj = JSON.parse(data);
 				var Id = obj["id"];
@@ -83,7 +83,29 @@ function extension(element) {
 
 app.use(bodyParser.json());
 
-var storage = multer.diskStorage({
+app.post("/savePres",  function (request, response) {
+
+	request.accepts('application/json');
+	var presJson = request.body;
+
+	console.log(presJson);
+	var Id = presJson["id"];
+	console.log(Id);
+
+	fs.writeFile(path.join(CONFIG.presentationDirectory, Id + ".pres.json"), JSON.stringify(presJson), (err) => {
+		if (err) {
+			console.error(response.status(500).end);
+			return response.status(500).end;
+		}
+
+		response.end('SAVED: ' + Id);
+	});
+
+
+});
+
+
+/*var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		cb(null, '/var/www/nodejs/uploads/');
 		cb(null, '/var/www/nodejs/public/admin/img/');
@@ -103,15 +125,14 @@ app.post("/upload", type, function (req, res, next) {
 	res.send(req.file);
 });
 
-io.sockets.on('connection', function (socket) {
+sockets.on('connection', function (socket) {
 	console.log('Client connected.');
 
 	socket.emit('connection', { hello: 'world' });
 	socket.on('data_comm', function (data) {
 		console.log(data);
 	});
-});
-
+});*/
 
 
 

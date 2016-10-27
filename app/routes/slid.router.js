@@ -3,14 +3,14 @@
 // slid.route.js
 var multer = require("multer");
 var uiid = require("./../../utils.js");
-var CONFIG = require("./../../config.json");
 var SlidController = require("./../controllers/slid.controller.js");
 var SlidModel=require("./../models/slid.model.js");
 var express = require("express");
 var router = express.Router();
 module.exports = router;
-var multerMiddleware = multer({ "dest": "/var/www/uploads/" });
+var multerMiddleware = multer({ "dest": "./../../uploads/" });
 var path = require("path");
+var CONFIG = require("./../../config.json");
 var fs = require("fs");
 
 router.get('/slids',function(request, response){
