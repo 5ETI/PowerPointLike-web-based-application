@@ -17,7 +17,7 @@ exports.listen = function(httpServer){
 
     // Handling IO events
     io.sockets.on("connection", function (socket) {
-        // First thing is notifying the client in order to get his ID from 'data_comm' event
+
         socket.emit("connection");
 
         socket.on("data_comm", function(data){
@@ -32,16 +32,17 @@ exports.listen = function(httpServer){
         	var obj = JSON.parse(data);
         	if (obj[CMD] != "PAUSE") {
 
-        		var id = obj[PRES_id];
+        		var id = obj[PRES_ID];
 
         		SlidModel.read(id, function(err, slid) {
         			if (err) {
         				console.error(err);
         			} else {
-        				slid.src = path.join(CONFIG.contentDirectory, slid.id + ".meta.json");
-        				socket.broadcast.emit('Slid meta data', slid);
-        			}
-        		});
+        				//slid.src = path.join(CONFIG.contentDirectory, slid.id + ".meta.json");
+                        slid.src = path.join(CONFIG.contentDirectory, slid.filename);
+                        socket.broadcast.emit('Slid meta data', slid);
+                    }
+                });
 
         	}
 

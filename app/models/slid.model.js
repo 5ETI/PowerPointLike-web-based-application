@@ -1,53 +1,56 @@
 "use strict";
 
-module.exports = SlidModel;
+//module.exports = SlidModel;
 
 var fs = require("fs");
 var path = require("path");
 var  CONFIG  =  require("../../config.json");
 process.env.CONFIG  =  JSON.stringify(CONFIG);
 
-function SlidModel () {
 
-	this.type = '';
-	this.id = '';
-	this.title = ''; 
-	this.fileName = '';
+var SlidModel=function(smodel) {
 
-	var data = '';
+	smodel=check_attr(smodel);
+	this.type = smodel.type;
+	this.id = smodel.id;
+	this.title = smodel.title; 
+	this.fileName = smodel.fileName;
 
-	this.getData = function() { return this.data; }
-	this.setData = function(data) { this.data = data; }
+	var data = smodel.data;
+
+	this.getData = function() { 
+		return this.data;
+	}
+
+	this.setData = function(data2) { 
+		if (data2 === "undefined") {return -1;}
+		this.data = data2;
+	}
+
+	function check_attr(smodel){
+		if(typeof smodel === "undefined")
+		{
+			smodel={type: null, id: null, title: null, filename: null, data: null};
+		}
+		return smodel;
+	}
 
 }
-
-function SlidModel (type, id, title, fileName, data) {
-
-	this.type = type;
-	this.id = id;
-	this.title = title; 
-	this.fileName = fileName;
-
-	var data = data;
-
-	this.getData = function() { return this.data; }
-	this.setData = function(data) { this.data = data; }
-
-}
-
 
 
 SlidModel.create = function(slid,callback) {
 
+	if(slid.id === "undefined" ) {
+		return console.error("L'id ne peut pas être nulle");
+	}
+	if(slid.filename === "undefined") {
+		return console.error("Le filename ne peut pas être nul");
+	}
 
 	fs.writeFile(path.join(CONFIG.contentDirectory, slid.fileName), slid.data, function(err) {
-		if(slid.id == null) {
-			return console.log("L'id ne peut pas être nulle");
-		}
 		if (err) {
-			return console.log(err);
+			return console.log(err); //return console.error(err);
 		}
-		
 		console.log('CREATED ' + slid.id);
 		fs.writeFile(path.join(CONFIG.contentDirectory, slid.id + ".meta.json"), JSON.stringify(slid), function(err) {
 			if (err) {
@@ -62,17 +65,18 @@ SlidModel.create = function(slid,callback) {
 
 SlidModel.read = function(id,callback) {
 
+	if(id === "undefined") {
+		return console.error("L'id ne peut pas être nulle");
+	}
 	fs.readFile(path.join(CONFIG.contentDirectory, id + ".meta.json"), 'utf8', function(err,data) {  
-		if(id == null) {
-			return console.log("L'id ne peut pas être nulle");
-		}
 		if (err) {
 			return console.log(err);
 		}
 		
 		var obj = JSON.parse(data);
+		var slid = new SlidModel(obj);
 		console.log("fichier lu");
-		callback(err,obj);
+		callback(err,slid);
 
 	});
 
@@ -83,13 +87,14 @@ SlidModel.update = function(slid,callback) {
 
 
 	if (slid.getData() && slid.getData().length > 0){
+		if(slid.id === "undefined") {
+			return console.error("L'id ne peut pas être nulle");
+		}
+		if(slid.fileName === "undefined") {
+			return console.error("Le filename ne peut pas être nul");
+		}
 		fs.writeFile(path.join(CONFIG.contentDirectory, slid.fileName), slid.data, function(err) {
-			if(slid.id == null) {
-				return console.log("L'id ne peut pas être nulle");
-			}
-			if(slid.fileName === undefined) {
-				return console.log("Le filename ne peut pas être nul");
-			}
+			
 			if (err) {
 				return console.log(err);
 			}
@@ -134,6 +139,8 @@ SlidModel.delete = function(id,callback) {
 
 	});
 
-	
+}
 
-};
+module.exports = SlidModel;
+
+
