@@ -9,7 +9,7 @@ var SlidModel=require("./../models/slid.model.js");
 var express = require("express");
 var router = express.Router();
 module.exports = router;
-var multerMiddleware = multer({ "dest": "./../../uploads/" });
+var multerMiddleware = multer({ "dest": "/var/www/uploads/" });
 var path = require("path");
 var fs = require("fs");
 
