@@ -3,7 +3,7 @@
 var CONFIG = require("./config.json");
 process.env.CONFIG = JSON.stringify(CONFIG);
 
-var utils = require("./app/utils/utils.js");
+var utils = require("./utils.js");
 var SlidModel = require("./app/models/slid.model.js");
 
 var slid = new SlidModel();
@@ -24,6 +24,7 @@ function test1(slid) {
 		if (err) {
 			console.error(err);
 		} else {
+			console.log("test2 begin");
 			test2(slid);
 		}
 	});
@@ -67,22 +68,21 @@ function test4(slid) {
 			testErr(slid);
 		}
 	});
-
 }
 
 function testErr(slid) {
 	console.log("====== TEST ERROR =======");
 	var slidTest = new SlidModel(12);
 	console.dir(slidTest);
-
 	test1(12);
 	slid.id = null;
 	test1(slid);
 	test2(slid);
 	test3(slid);
 
-	slid.id = 12;
-	test3(slid);
+    slid.id = 12;
+    test3(slid);
+   
 }
 
 (function() {

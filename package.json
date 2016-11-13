@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "TP Node",
   "main": "app.js",
-  "scripts" :  {
-    "test" :  "echo \"Error: no test specified\" && exit 1",
-    "start" :  "node app.js"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
-  "private" :   true ,
+  "private": true,
   "author": "Bertrand",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "multer": "^1.2.0",
+    "socket.io": "^1.5.0"
   }
 }
