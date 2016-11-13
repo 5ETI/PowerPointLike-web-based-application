@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="adminApp" ng-controller="eventCtrl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+  <link href="lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/js.css" rel="stylesheet">
+
+</head>
+<body>
+
+  <div class="container-fluid fullScreenHeight zeroRef" >
+    <div class="row container-fluid fullScreenHeight ">
+
+  <!-- *************   CENTER PANEL  *************-->
+  <div class=" zeroRef fullScreenHeight" id="Centerpanel" ng-controller="playerCtr">
+
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " id="subpanelcenter"> 
+      <div class="form-group" >
+        <label for="currentSlideTitle">Title</label>
+        <input type="text" ng-model="currentSlide.title" class="form-control" id="currentSlideTitle">
+      </div>  
+      <div ng-drop="true" style="min-height: 100px;min-width: 100px;" id="divImage">
+        <img ng-src="{{contentMap.payload[currentSlide.contentMap[1]].src}}" alt="{{contentMap.payload[currentSlide.contentMap[1]].title}}" class="img-responsive" id="imagecenter">
+      </div>
+    </div>
+  </div>
+  
+<hr/>
+</div>
+</div>
+</div>
+
+<script src="lib/js/jquery-1.11.3.min.js"></script>
+<script src="lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script src="lib/js/dropzone.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+
+<!-- ANGULAR -->    
+<script src="lib/js/angular.min.js"></script>
+
+<script src="js/services/FactoryService-s3.1.js"></script>
+<script src="js/services/CommService3.3.js"></script>   
+<script src="js/application/AdminApp-s3.3.js"></script>
+
+<script src="js/controllers/EventController-s3.3.js"></script>
+<script src="js/controllers/PlayerController-s3.3.js"></script>
+<script src="js/controllers/DropZoneController.js"></script>
+
+</body>
+</html>

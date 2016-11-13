@@ -256,6 +256,10 @@ div.table .file-row:nth-child(odd) {
   transition: opacity 0.3s linear;
 }
 
+#previews {
+  right: 80px;
+}
+
 /* Hide the progress bar when finished */
 #previews .file-row.dz-success .progress {
   opacity: 0;

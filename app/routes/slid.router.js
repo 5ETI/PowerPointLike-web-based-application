@@ -13,22 +13,7 @@ var path = require("path");
 var CONFIG = require("./../../config.json");
 process.env.CONFIG  =  JSON.stringify(CONFIG);
 var fs = require("fs");
-//var bodyParser = require('body-parser');
-//var app = express();
 
-
-
-/*var storage = multer.diskStorage({
-	  destination: function (req, file, cb) {
-		  cb(null, '/uploads/');
-	  },
-	  filename: function (req, file, cb) {
-		  console.log("file: " + JSON.stringify(file));
-		  cb(null, uiid.generateUUID() + path.extname(file.originalname));
-	  }
-	});*/
-
-//var upload = multer({ storage: storage });
 
 router.get('/slids',function(request, response){
 	SlidController.list(function(err, Slidlist){
@@ -66,7 +51,7 @@ var type = path.extname(request.file.originalname).substr(1);
 
 var tmp_path = request.file.path;
     // set where the file should actually exists 
-    var target_path = path.join(CONFIG.contentDirectory, request.file.originalname);
+    var target_path = path.join(CONFIG.contentDirectory, ofilename);
     // move the file from the temporary location to the intended location
     fs.rename(tmp_path, target_path, function(err) {
     	if (err) throw err;
@@ -75,7 +60,7 @@ var tmp_path = request.file.path;
         	if (err) {
         		throw err;
         	}else{
-        		var image = request.file.originalname;
+        		var image = ofilename;
         	};
         });
 
@@ -90,7 +75,7 @@ var tmp_path = request.file.path;
         	json_file["type"]= type;
         	json_file["title"]=title;
         	json_file["fileName"]= json_file["id"] + '.' + type;
-        	json_file["data"]=JSON.stringify(request.file);
+        	json_file["data"]=data;
 
 
         	SlidController.create(json_file, function(err, data){
@@ -100,14 +85,14 @@ var tmp_path = request.file.path;
         		}
         		else{
         			fs.rename(target_path,path.join(CONFIG.contentDirectory,json_file["fileName"]));
-        			response.json(data);
+        			//response.json(data);
         		}
         	});
 
         });
     });
 
-//response.send(request.files);
+response.send(request.files);
 
 });
 
