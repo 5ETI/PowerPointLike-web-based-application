@@ -31,9 +31,9 @@ var list = function(callback){
        else{
 
         var slide = new SlidModel(slid);
-        console.dir(slid);
+        console.dir(slid.getData());
         slide.src = path.join(CONFIG.contentDirectory, slide.fileName);
-        slide.setData(slid.getData());
+        //slide.setData(slid.getData());
         slid_list[slide.id] = slide;
         if(i == filteredFiles.length - 1){
          return callback(null, slid_list);
