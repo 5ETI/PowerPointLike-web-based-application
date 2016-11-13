@@ -75,7 +75,7 @@ SlidModel.read = function(id,callback) {
 		
 		var obj = JSON.parse(data);
 		var slid = new SlidModel(obj);
-		console.log("fichier lu");
+		//console.log("fichier lu");
 		callback(err,slid);
 
 	});

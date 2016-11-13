@@ -3,6 +3,9 @@
 console.log("It works !");
 
 var  path  =  require("path");
+
+
+
 var fs = require("fs");
 var  express  =  require("express");
 var SlideModel = require("./app/models/slid.model.js");
@@ -14,9 +17,12 @@ var util = require("./utils.js");
 var  defaultRoute  =  require("./app/routes/default.route.js");
 var  slidRoute  =  require("./app/routes/slid.router.js");
 var IOController = require("./app/controllers/io.controller.js");
+var slidController = require("./app/controllers/slid.controller.js");
+
 
 
 var  app  =  express();
+
 
 // init server
 var  server  =  http.createServer(app);
@@ -29,6 +35,8 @@ IOController.listen(server);
 
 app.use(defaultRoute);
 app.use(slidRoute);
+
+
 app.use("/admin",express.static(path.join(__dirname, "/public/admin")));
 app.use("/login",express.static(path.join(__dirname, "/public/login")));
 
@@ -103,6 +111,7 @@ app.post("/savePres",  function (request, response) {
 
 
 });
+
 
 
 /*var storage = multer.diskStorage({

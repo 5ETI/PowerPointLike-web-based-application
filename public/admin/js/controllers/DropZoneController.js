@@ -7,7 +7,7 @@ angular.module('adminApp').controller('dropzoneController', ['$scope', '$log', '
      previewNode.parentNode.removeChild(previewNode);
 
       var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-        url: "/upload", // Set the url
+        url: "/slids", // Set the url
         thumbnailWidth: 80,
         thumbnailHeight: 80,
         parallelUploads: 20,

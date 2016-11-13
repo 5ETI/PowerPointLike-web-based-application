@@ -20,10 +20,10 @@ exports.listen = function(httpServer){
 
         socket.emit("connection");
 
-        socket.on("data_comm", function(data){
-        	console.log("Socket connection on ID: " + data.id);
+        socket.on("data_comm", function(id){
+        	console.log("Socket connection on ID: " + id);
         	var map = {};
-        	map[data.id] = socket;
+        	map[id] = socket;
 
         });
 

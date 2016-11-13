@@ -1,5 +1,6 @@
 var SlidModel=require("./../models/slid.model.js");
 var CONFIG = require("./../../config.json");
+process.env.CONFIG  =  JSON.stringify(CONFIG);
 var path = require("path");
 var fs = require("fs");
 
@@ -28,9 +29,12 @@ var list = function(callback){
          return callback("Error reading content: " + err);
        }
        else{
+
+        var slide = new SlidModel(slid);
         console.dir(slid);
-        slid.src = path.join(CONFIG.presentationDirectory + '/' + slid.filename);
-        slid_list[slid.id] = slid;
+        slide.src = path.join(CONFIG.contentDirectory, slide.fileName);
+        slide.setData(slid.getData());
+        slid_list[slide.id] = slide;
         if(i == filteredFiles.length - 1){
          return callback(null, slid_list);
        }
@@ -53,7 +57,9 @@ function extension(element) {
 
 var create = function(slid, callback){
 
-  var slide = new SlidModel(slid.type,slid.id,slid.title,slid.fileName);
+  //var slide = new SlidModel(slid.type,slid.id,slid.title,slid.fileName);
+  var slide = new SlidModel(slid);
+
 
   slide.setData(slid.data);
 
