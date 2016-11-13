@@ -47,7 +47,7 @@ function loadPres(){
                 	$log.info(data)
             })
             .error(function(data){
-            	log.info("rejected")
+            	$log.info("rejected")
                 deferred.reject();
             });
         return deferred.promise;
