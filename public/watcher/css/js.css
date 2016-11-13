@@ -1,0 +1,341 @@
+html,body {height: 100%; padding-top: 0px; overflow-x:hidden; overflow-y:hidden}
+.zeroRef{padding: 0px;margin:0px}
+.fullScreenHeight{height: 100%;}
+
+@font-face {
+  font-family: 'ralewayblack';
+  src: url('raleway-black-webfont.woff2') format('woff2'),
+  url('raleway-black-webfont.woff') format('wxoff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+/*MODIFICATION BOOSTRAP FOR CUSTOM*/
+
+/*NG-DROP*/
+[ng-drag], [ng-drag-clone]{
+  -moz-user-select: -moz-none;
+  /*  -khtml-user-select: none;*/
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.drag-object, [ng-drag-clone], [ng-drop] [ng-drag]{
+  color:white;
+  text-align: center;
+}
+.drag-object [ng-drag]{
+  /*position: absolute;*/
+  top:0; left:0;
+  padding: 0;
+  margin: 0;
+}
+[ng-drag].dragging{
+  opacity: 0.5;
+}
+
+body{
+  margin:5px;
+  padding:10px;
+  background-color: #000000;
+  font-family: 'ralewayblack',Arial,sans-serif;
+}
+input:not([type]), input[type="text"]
+{
+  border-radius: 20px;
+  border: solid #2fc93b 3px;
+  margin-bottom: 10px;
+}
+label{
+  font-size: 20px;
+}
+#currentSlideText
+{
+  border-radius: 20px;
+  border: solid #2fc93b 2px;
+  margin-bottom: 10px;
+  resize: none;
+}
+#Leftpanel{
+  background-color: #C0C0C0;
+  border-radius: 28px;
+  border: solid #404040 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding:10px;
+}
+#Centerpanel{
+  background-color: #C0C0C0;
+  border-radius: 28px;
+  border: solid #404040 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding:10px;
+}
+#subpanelcenter{
+  height: 100%;
+  width: 100%;
+}
+#Rightpanel{
+ background-color: #C0C0C0;
+ border-radius: 28px;
+ border: solid #404040 5px;
+ padding:10px;
+ height: 100%;
+}
+#template{
+  border-radius: 20px;
+}
+.file-row{
+  border-radius: 20px;
+}
+button:active{
+  background-color: olive;
+}
+button:focus{
+  background:olive;
+}
+.btn-default {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  /*padding: 10px 20px 10px 20px;*/
+  border: solid #1f8c1f 2px;
+  text-decoration: none;
+  background-color: #2fc93b;
+  color: #ffffff;
+}
+.btn-success{
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  border: solid #1f628d 2px;
+  text-decoration: none;
+}
+.btn-primary{
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  border: solid #1f628d 2px;
+  text-decoration: none;
+}
+.btn-warning{
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  border: solid #1f628d 2px;
+  text-decoration: none;
+}
+.btn-danger{
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  border: solid #1f628d 2px;
+  text-decoration: none;
+}
+
+#currentContentTitle{
+  border-radius: 20px;
+  border: solid #2fc93b 3px;
+  margin-bottom: 10px;
+
+}
+#image{
+  border-radius: 20px;
+  border: solid #000000 2px;
+}
+
+#imageUploaded{
+  border-radius: 20px;
+}
+
+.slidZoneSelected{
+  margin: 0px;
+  border: 0px;
+  padding: 2px;
+}
+#imageleft{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20px;
+}
+#divImage{
+  /*max-width: 100%;
+  max-height: 100%;*/
+  overflow:hidden;
+
+}
+#imagecenter{
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+}
+.btn-group-wrap {
+  text-align: center;
+}
+
+}
+.btn:hover {
+  background: #3dfc03;
+  text-decoration: none;
+  border-color: #1f8c1f;
+}
+.slidZoneEmpty{
+  height: 150px;
+  width: 100%;
+  border-color:rgba(169, 169, 169, 0.71);   
+  border-style: dashed;
+  border-width: medium;
+  border-radius:1em;
+  text-align: center;
+  background-color:rgba(169, 169, 169, 0.12);
+}
+
+.slidZoneSelectedEmpty{
+  height: 150px;
+  width: 100%;
+  border-color:rgba(0, 100, 0, 0.78);   
+  border-style: dashed;
+  border-width: medium;
+  border-radius:1em;
+  text-align: center;
+  background-color:rgba(183, 255, 183, 0.62);
+}
+
+.slidZoneSelected{
+  border-color:rgba(0, 100, 0, 0.78);   
+  border-style: dashed;
+  border-width: medium;
+  border-radius:1em;
+  text-align: center;
+  /*    background-color:rgba(183, 255, 183, 0.62);*/
+}
+.hide{
+  visibility: hidden;
+}
+
+.divOverflow{
+  height:100%;
+  overflow-y:auto;;
+}
+
+.contentBlock{
+  margin: 1em;
+}
+
+/* DROPZONE CSS */
+/*Mimic table appearance */
+div.table {
+  display: table;
+  border-radius: 20px;
+}
+div.table .file-row {
+  display: table-row;
+}
+div.table .file-row > div {
+  display: table-cell;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+  padding: 8px;
+}
+div.table .file-row:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+
+
+/* The total progress gets shown by event listeners */
+#total-progress {
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
+
+/* Hide the progress bar when finished */
+#previews .file-row.dz-success .progress {
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
+
+/* Hide the delete button initially */
+#previews .file-row .delete {
+  display: none;
+}
+
+/* Hide the start and cancel buttons and show the delete button */
+
+#previews .file-row.dz-success .start,
+#previews .file-row.dz-success .cancel {
+  display: none;
+}
+#previews .file-row.dz-success .delete {
+  /*display: block;*/
+}
+#previewsDIV{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20px;
+}
+#template{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20px;
+}
+
+.dropzone{
+  .dz-preview {
+    position: relative;
+    /*display: inline-block;*/
+    border-radius: 20px;
+    vertical-align: top;
+
+    margin: 16px;
+    min-height: 100px;
+
+    &:hover {
+      // Making sure that always the hovered preview element is on top
+      z-index: 1000;
+      .dz-details {
+        opacity: 1;
+      }
+    }
+
+    &.dz-file-preview {
+      border-radius: 20px;
+
+      .dz-image {
+        border-radius: $image-border-radius;
+        background: #999;
+        background: linear-gradient(to bottom, #eee, #ddd);
+      }
+
+      .dz-details {
+        opacity: 1;
+      }
+    }
+
+    &.dz-image-preview {
+      border-radius: 20px;
+      background: white;
+      .dz-details {
+        @include prefix((transition: opacity 0.2s linear));
+      }
+    }
+
+    .dz-remove {
+      font-size: 14px;
+      text-align: center;
+      display: block;
+      cursor: pointer;
+      border: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
