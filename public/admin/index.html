@@ -20,7 +20,7 @@
       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 zeroRef fullScreenHeight divOverflow" id="Leftpanel" > 
        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
          <div class="btn-group" role="group" aria-label="...">
-           <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+           <button type="button" class="btn btn-default" ng-click="loadPres()"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
          </div>
          <div class="btn-group" role="group" aria-label="...">
           <button type="button" class="btn btn-default" ng-click="savePres()"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></button>
@@ -31,11 +31,11 @@
         </div>
         <div class="form-group">
           <label for="currentPresTitle">Title</label>
-          <input type="text" ng-model="currentPresenation.title" class="form-control" id="currentPresTitle">
+          <input type="text" ng-model="currentPresentation.title" class="form-control" id="currentPresTitle">
         </div> 
         
       </div>
-      <div ng-repeat="slid in currentPresenation.slidArray" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-click="selectCurrentSlid(slid)"> 
+      <div ng-repeat="slid in currentPresentation.slidArray" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-click="selectCurrentSlid(slid)"> 
        <h3>{{slid.title}}</h3>                     
        <div ng-drop="true" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 slidZoneEmpty"  ng-class="{'slidZoneSelectedEmpty': slid.id == currentSlide.id, 'hide':slid.contentMap[1]!=undefined}" ng-drop-success="onDropComplete($data,$event)" style="min-height: 100px;min-width: 100px"; id="parentImageLeft">  
        </div>

@@ -1,6 +1,5 @@
 {
-    "port" :  1337,
-    "contentDirectory": "/Users/rudyjdira/Documents/ProjetASI/TpStepByStepNode/uploads",
-    "presentationDirectory": "/Users/rudyjdira/Documents/ProjetASI/TpStepByStepNode/presentation_content"
-
+    "port" :  1400,
+    "contentDirectory": "/var/www/nodejs/uploads",
+    "presentationDirectory": "/var/www/nodejs/presentation_content"
 }

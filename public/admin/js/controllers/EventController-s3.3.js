@@ -5,8 +5,8 @@ eventCrtFnt.$inject=['$scope','$log','$window','factory','comm'];
 function eventCrtFnt($scope, $log, $window, factory, comm){
 
 
-  $scope.currentPresenation=factory.presentationCreation("template_pres","description of the template présentation");
-
+  $scope.currentPresentation=factory.presentationCreation("template_pres","description of the template présentation");
+  $scope.currentPresentation.slidArray = [];
    //CREATE an object for interactions with ng-include controller
    $scope.contentMap = {};
    $scope.contentMap.payload="";
@@ -24,30 +24,43 @@ function eventCrtFnt($scope, $log, $window, factory, comm){
       $log.error('failure loading movie', errorPayload);
     });
 
-   var firstPresentation=comm.loadPres('test','test');
+   /*var firstPresentation=comm.loadPres('test','test');
    firstPresentation.then(
     function(payload) { 
       $scope.presentationMap.payload= payload;
 
       for(key in $scope.presentationMap.payload){
-        $scope.currentPresenation =$scope.presentationMap.payload[key];
+        $scope.currentPresentation =$scope.presentationMap.payload[key];
       }
 
     },
     function(errorPayload) {
       $log.error('failure loading movie', errorPayload);
-    });
+    });*/
 
 
    $scope.newSlide=function(){
     var slid=factory.slidCreation("slide-Title","slide-text");
-    $scope.currentPresenation.slidArray.push(slid);
-
+    $scope.currentPresentation.slidArray.push(slid);
   }
 
   $scope.savePres=function(){
-    comm.savePres($scope.currentPresenation);
+    var savingPres = comm.savePres($scope.currentPresentation);
   }
+
+  $scope.loadPres=function(){
+    var loadPresentation = comm.loadPres();
+    loadPresentation.then(
+      function(data) { 
+        $log.info(data.pres);
+        $scope.currentPresentation=factory.presentationCreation("template_pres","description of the template présentation",data.pres.slidArray);
+      },
+      function(error) {
+        $log.error('failure loading movie', errorPayload);
+      });
+
+  }
+
 
   $scope.selectCurrentSlid=function(slide){
     $scope.currentSlide = slide;
@@ -83,7 +96,31 @@ function eventCrtFnt($scope, $log, $window, factory, comm){
           }
           return false;
         }    
-
+        function load_init_Pres(pres_id){
+          var firstPresentation=comm.loadPres();
+          firstPresentation.then(
+            function(payload) {
+              $scope.presentationMap.payload = payload;
+              $scope.presentationMap.array = factory.mapToArray(payload);
+              if(pres_id !== undefined){
+                if(payload[pres_id] !== undefined)
+                  $scope.currentPresentation = $scope.presentationMap.payload[pres_id];
+                else
+                  console.error("Server sent incoherent data");
+              }
+              else{
+                    // Get the first presentation of the map
+                    for(var key in payload){
+                      $scope.currentPresentation = $scope.presentationMap.payload[key];
+                      break;
+                    }
+                  }
+                  $scope.currentSlide = $scope.currentPresentation.slidArray[0];
+                },
+                function(errorPayload) {
+                  $log.error('failure loading presentation', errorPayload);
+                });
+        }
 
 
       };

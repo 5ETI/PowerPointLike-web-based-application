@@ -15,15 +15,15 @@ function playerCtrFnt($scope,$log,$window,factory,comm){
       comm.io.emitBegin(socket);
       $log.info("PlayerController : emitBegin");
         // Changes View
-        $scope.$parent.currentSlide = $scope.$parent.currentPresenation.slidArray[0];
+        $scope.$parent.currentSlide = $scope.$parent.currentPresentation.slidArray[0];
         break;
 
         case 'previous':
-        var numSlides = $scope.$parent.currentPresenation.slidArray.length;
+        var numSlides = $scope.$parent.currentPresentation.slidArray.length;
         for (var i = 0; i < numSlides ; i++) {
-          if ($scope.$parent.currentPresenation.slidArray[i].id == $scope.$parent.currentSlide.id && i != 0) {
+          if ($scope.$parent.currentPresentation.slidArray[i].id == $scope.$parent.currentSlide.id && i != 0) {
             $scope.$parent.currentSlide = null;
-            var slid = $scope.$parent.currentPresenation.slidArray[i-1];
+            var slid = $scope.$parent.currentPresentation.slidArray[i-1];
             $scope.$parent.currentSlide = slid;
             break;
           }
@@ -37,20 +37,20 @@ function playerCtrFnt($scope,$log,$window,factory,comm){
          pauseActivated = false;
          $log.info("Play\n\n");
          var x = setInterval(function(){
-           var numSlides = $scope.$parent.currentPresenation.slidArray.length;
+           var numSlides = $scope.$parent.currentPresentation.slidArray.length;
            var i = 0;
            for (i = 0; i < numSlides; i++) {
              if($scope.$parent.currentSlide != undefined){
-               if ($scope.$parent.currentPresenation.slidArray[i].id == $scope.$parent.currentSlide.id && i < (numSlides-1)) { 
-                 var slid = $scope.$parent.currentPresenation.slidArray[i+1];
-                 // $scope.currentSlide = $scope.currentPresenation.slidArray[i+1];
+               if ($scope.$parent.currentPresentation.slidArray[i].id == $scope.$parent.currentSlide.id && i < (numSlides-1)) { 
+                 var slid = $scope.$parent.currentPresentation.slidArray[i+1];
+                 // $scope.currentSlide = $scope.currentPresentation.slidArray[i+1];
                  break;
                }
              }
            }
            if(pauseActivated == false){
              $scope.$parent.currentSlide = null;
-             $scope.$parent.currentSlide = $scope.$parent.currentPresenation.slidArray[i+1];
+             $scope.$parent.currentSlide = $scope.$parent.currentPresentation.slidArray[i+1];
            }
            $scope.$apply();
          }, 3000);
@@ -68,11 +68,11 @@ function playerCtrFnt($scope,$log,$window,factory,comm){
       
       case 'next':
       // Changes View
-      var numSlides = $scope.$parent.currentPresenation.slidArray.length;
+      var numSlides = $scope.$parent.currentPresentation.slidArray.length;
       for (var i = 0; i < numSlides; i++) {
-        if ($scope.$parent.currentPresenation.slidArray[i].id == $scope.$parent.currentSlide.id && i < (numSlides-1) ){
+        if ($scope.$parent.currentPresentation.slidArray[i].id == $scope.$parent.currentSlide.id && i < (numSlides-1) ){
           $scope.$parent.currentSlide = null;
-          var slid = $scope.$parent.currentPresenation.slidArray[i+1];
+          var slid = $scope.$parent.currentPresentation.slidArray[i+1];
           $scope.$parent.currentSlide = slid;
           break;
         }
@@ -84,8 +84,8 @@ function playerCtrFnt($scope,$log,$window,factory,comm){
 
         case 'last':
       // Changes View
-      var numSlides = $scope.$parent.currentPresenation.slidArray.length;
-      $scope.$parent.currentSlide = $scope.$parent.currentPresenation.slidArray[numSlides-1];
+      var numSlides = $scope.$parent.currentPresentation.slidArray.length;
+      $scope.$parent.currentSlide = $scope.$parent.currentPresentation.slidArray[numSlides-1];
       //Sends to server via socket
       comm.io.emitEnd(socket);
       $log.info("PlayerController : emitEnd");

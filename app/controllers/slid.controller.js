@@ -5,8 +5,8 @@ var path = require("path");
 var fs = require("fs");
 
 var list = function(callback){
-  var dirpath = path.resolve(path.dirname(require.main.filename), CONFIG.contentDirectory);
-
+  //var dirpath = path.resolve(path.dirname(require.main.filename), CONFIG.contentDirectory);
+  var dirpath = CONFIG.contentDirectory;
   fs.readdir(CONFIG.contentDirectory, function (err, files) {
     if (err) {
       console.error(response.statut(500).end);

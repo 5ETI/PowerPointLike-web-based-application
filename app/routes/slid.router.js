@@ -36,7 +36,6 @@ router.get('/slids',function(request, response){
 			console.error(response.statut(500).end);
 			return response.statut(500).end;		}
 			else{
-				//response.send("ok");
 				response.json(Slidlist);
 			}
 		});

@@ -10,64 +10,54 @@ function commFnc($http,$q, $log,$filter, factory){
 	};
 
 	function loadImages(presName,presID){
-		var payload = {};
 		var deferred = $q.defer();
-		setInterval(function(presName,presID){
-			
-			var cont = factory.contentCreation('img 0', 'test ', 'img/0.jpg');
-			var key = cont.id;
-			payload[key] = cont;
-			var cont = factory.contentCreation('img 1', 'test ', 'img/0.png');
-			var key = cont.id;
-			payload[key] = cont;
-
-			var cont = factory.contentCreation('img 2', 'test ', 'img/10.jpg');
-			var key = cont.id;
-			payload[key] = cont;
-			
-			deferred.resolve(payload);
-			// }else{
-			// 	deferred.reject(status);
-			// }
-			clearInterval(this);
-		},500,presName,presID);
-		
-		return deferred.promise;
+        $http.get("/slids")
+            .success(function(data){
+                if(data)
+                    deferred.resolve(data);
+                else
+                    deferred.reject();
+            })
+            .error(function(data){
+            	log.info("rejected")
+                deferred.reject();
+            });
+        return deferred.promise;
 };
 
 
-function loadPres(presName,presID){
+
+function loadPres(){
 	var pres = {};
-	var deferred = $q.defer();
+	var presName = "test SavePres";
+	var presID = "f2067afa-f2d8-48ee-baa0-254ff21bc4a3";
+	/*var deferred = $q.defer();
 	setInterval(function(presName,presID){
 		pres["1"] = factory.presentationCreation(presName,presID);
 		deferred.resolve(pres);
-			// }else{
-			// 	deferred.reject(status);
-			// }
 			clearInterval(this);
 		},500,presName,presID);
 
-	return deferred.promise;
-//// ************  FOR WHEN NODEJS SERVER READY  ******************  ////////
-// 	var deferred = $q.defer();
-// 	$http.get('/loadPres').
-// 	success(function(data, status, headers, config) {
-// 		deferred.resolve(data);
-// 	}).
-// 	error(function(data, status, headers, config) {
-// 		deferred.reject(status);
-// // or server returns response with an error status.
-// });
-// 	return deferred.promise;
-// }
+	return deferred.promise;*/
+	var deferred = $q.defer();
+        $http.get("/loadPres")
+            .success(function(data){
+                if(data)
+                    deferred.resolve(data);
+                	$log.info(data)
+            })
+            .error(function(data){
+            	log.info("rejected")
+                deferred.reject();
+            });
+        return deferred.promise;
 } ;
 
 
-function savePres(presName,presID){
-	var presToSend=$filter('json')($scope.currentPresentation);
+function savePres(pres){
 	var deferred = $q.defer();
-	$http.post('/savePres', presToSend)
+	var presTosend = {pres: pres, pres_id: pres.id, id: pres.id};
+	$http.post('/savePres', JSON.stringify(presTosend))
 	.success(function (data, status, headers, config) {
 		deferred.resolve(data);
 		alert('Presentation Saved');

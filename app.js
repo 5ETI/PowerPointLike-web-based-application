@@ -69,14 +69,14 @@ app.get("/loadPres",  function (request, response) {
 
 				jsonData[Id] = obj;
 				compteur ++;
-				if (compteur == filteredFiles.length) returnJson();
+				if (compteur == filteredFiles.length) returnJson(Id);
 			});
 		});
 	});
 
-	function returnJson(){
+	function returnJson(Id){
 
-		response.send(jsonData);
+		response.send(jsonData[Id]);
 
 	}
 
@@ -100,7 +100,7 @@ app.post("/savePres",  function (request, response) {
 	var Id = presJson["id"];
 	console.log(Id);
 
-	fs.writeFile(path.join(CONFIG.presentationDirectory, Id + ".pres.json"), JSON.stringify(presJson), (err) => {
+	fs.writeFile(path.join(CONFIG.presentationDirectory, Id + ".pres.json"), JSON.stringify(presJson), function(err) {
 		if (err) {
 			console.error(response.status(500).end);
 			return response.status(500).end;

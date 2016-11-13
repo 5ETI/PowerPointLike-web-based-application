@@ -57,19 +57,16 @@ angular.module('adminApp').controller('dropzoneController', ['$scope', '$log', '
       myDropzone.on("success", function(file,responsenew) {
         // var args = Array.prototype.slice.call(arguments);
         // String json = JSON.stringify(file);
-        alert(responsenew.path);
-        var available_content=comm.loadImages('test','test');
-        available_content.then(
-          function(payload) { 
-            var cont = factory.contentCreation('img'+5, 'test ', "img/"+responsenew.originalname);// Can't download from outside public
-            var key = cont.id;
-            payload[key] = cont;
-            $scope.$parent.contentMap.payload = payload;
-            $scope.$parent.contentMap.array=factory.mapToArray(payload);
-          },
-          function(errorPayload) {
-            $log.error('failure loading movie', errorPayload);
-          });
+        myDropzone.removeAllFiles(true);
+        var available_content=comm.loadImages();
+            available_content.then(
+                function(payload) { 
+                   $scope.$parent.contentMap.payload = payload;
+                    $scope.$parent.contentMap.array=factory.mapToArray(payload);
+                },
+                function(errorPayload) {
+                    $log.error('failure loading movie', errorPayload);
+                });
       });
 
       return myDropzone;

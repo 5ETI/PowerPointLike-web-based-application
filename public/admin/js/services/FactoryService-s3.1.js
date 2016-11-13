@@ -67,6 +67,15 @@ function factoryFnc(){
         presentation.slidArray=[];
         return presentation;
      };
+
+     function presentationCreation(title,description,slidArray){
+        var presentation={};
+        presentation.id=generateUUID();
+        presentation.title=title;
+        presentation.description=description;
+        presentation.slidArray=slidArray;
+        return presentation;
+     };
    
     
     function mapToArray(map){
