@@ -1,6 +1,6 @@
 {
     "port" :  1337,
-    "contentDirectory": "/Users/rudyjdira/Documents/ProjetASI/TpStepByStepNode/uploads",
-    "presentationDirectory": "/Users/rudyjdira/Documents/ProjetASI/TpStepByStepNode/presentation_content"
+    "contentDirectory": "/home/maxime/Documents/5ETI/NodeAngular/uploads",
+    "presentationDirectory": "/home/maxime/Documents/5ETI/NodeAngular/presentation_content"
 
 }

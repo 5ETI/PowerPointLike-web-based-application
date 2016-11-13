@@ -17,12 +17,14 @@ router.get('/slids',function(request, response){
 	SlidController.list(function(err, Slidlist){
 		if(err){
 			console.error(response.statut(500).end);
-			return response.statut(500).end;		}
-			else{
-				//response.send("ok");
-				response.json(Slidlist);
-			}
-		});
+			return response.statut(500).end;		
+		}
+		else{
+			console.info(response.json(Slidlist));
+			//response.send("ok");
+			return response.json(Slidlist);
+		}
+	});
 });
 
 

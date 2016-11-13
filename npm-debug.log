@@ -1,7 +1,10 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
+1 verbose cli [ '/opt/node-v4.5.0-linux-x64/bin/node',
+1 verbose cli   '/opt/node-v4.5.0-linux-x64/bin/npm',
+1 verbose cli   'start',
+1 verbose cli   '-d' ]
 2 info using npm@2.15.9
-3 info using node@v4.6.0
+3 info using node@v4.5.0
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info prestart tp-node@1.0.0
 6 info start tp-node@1.0.0
@@ -9,19 +12,19 @@
 8 info tp-node@1.0.0 Failed to exec start script
 9 verbose stack Error: tp-node@1.0.0 start: `node app.js`
 9 verbose stack Exit status 1
-9 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:217:16)
+9 verbose stack     at EventEmitter.<anonymous> (/opt/node-v4.5.0-linux-x64/lib/node_modules/npm/lib/utils/lifecycle.js:217:16)
 9 verbose stack     at emitTwo (events.js:87:13)
 9 verbose stack     at EventEmitter.emit (events.js:172:7)
-9 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+9 verbose stack     at ChildProcess.<anonymous> (/opt/node-v4.5.0-linux-x64/lib/node_modules/npm/lib/utils/spawn.js:24:14)
 9 verbose stack     at emitTwo (events.js:87:13)
 9 verbose stack     at ChildProcess.emit (events.js:172:7)
 9 verbose stack     at maybeClose (internal/child_process.js:829:16)
 9 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
 10 verbose pkgid tp-node@1.0.0
-11 verbose cwd /Users/rudyjdira/Documents/ProjetASI/TpStepByStepNode
-12 error Darwin 16.0.0
-13 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
-14 error node v4.6.0
+11 verbose cwd /home/maxime/Documents/5ETI/NodeAngular
+12 error Linux 3.13.0-100-generic
+13 error argv "/opt/node-v4.5.0-linux-x64/bin/node" "/opt/node-v4.5.0-linux-x64/bin/npm" "start" "-d"
+14 error node v4.5.0
 15 error npm  v2.15.9
 16 error code ELIFECYCLE
 17 error tp-node@1.0.0 start: `node app.js`
